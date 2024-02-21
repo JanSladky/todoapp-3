@@ -1,5 +1,9 @@
 <template>
   <div><input type="text" class="todo-input" placeholder="Zadej úkol" v-model="newTodo" /></div>
+  <div v-for="todo in todos" :key="todo.id" class="todo-item">
+    {{todo.title}}
+
+  </div>
 </template>
 
 <script>
