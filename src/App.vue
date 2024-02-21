@@ -1,7 +1,7 @@
 <template>
   <div class="home container">
     <img class="logo" alt="Vue logo" src="./assets/logo.png" />
-    <h1>This is Hanz Todo-app</h1>
+    <h1>Hanzovo todoAppka</h1>
     <todo-list></todo-list>
   </div>
 </template>
