@@ -1,12 +1,20 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="home">
+    <img class="logo" alt="Vue logo" src="./assets/logo.png" />
+    <h1>This is Hanz Todo-app</h1>
+  </div>
 </template>
 
 <style lang="scss">
+/** CSS RESET */
+* {
+  box-sizing: border-box;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+/**END OF CSS RESET */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -14,7 +22,11 @@
   text-align: center;
   color: #2c3e50;
 }
-
+.logo {
+  display: block;
+  margin: 20px auto;
+  height: 75px;
+}
 nav {
   padding: 30px;
 
