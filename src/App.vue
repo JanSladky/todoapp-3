@@ -1,9 +1,21 @@
 <template>
-  <div class="home">
+  <div class="home container">
     <img class="logo" alt="Vue logo" src="./assets/logo.png" />
     <h1>This is Hanz Todo-app</h1>
+    <todo-list></todo-list>
   </div>
 </template>
+
+<script>
+import TodoList from "./components/TodoList.vue";
+
+export default {
+  name: "App",
+  components: {
+    TodoList,
+  },
+};
+</script>
 
 <style lang="scss">
 /** CSS RESET */
