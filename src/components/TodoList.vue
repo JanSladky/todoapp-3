@@ -35,6 +35,11 @@ export default {
   },
   methods: {
     addTodo() {
+        // Přidání kontroly že je řetězec prázdný tak nepřidávat novou položku
+        if(this.newTodo.trim() == 0) {
+            return
+        }
+
         this.todos.push({
             id: this.idForTodo,
             title: this.newTodo,
