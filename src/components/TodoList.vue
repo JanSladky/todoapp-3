@@ -54,11 +54,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+* {
+    font-size: 20px;
+}
 .todo-input {
   border: 3px solid #3fb883;
   border-radius: 5px;
-  height: 40px;
+  //height: 40px;
   width: 100%;
   outline: 0;
+  padding: 10px 20px;
+}
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0px;
+    
+
 }
 </style>
