@@ -2,7 +2,8 @@
   <div><input type="text" class="todo-input" placeholder="Zadej úkol" v-model="newTodo" @keyup.enter="addTodo"></div>
   <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item">
     <div class="todo-item-left">
-        <div class="todo-item-label" v-if="!todo.editing" @dblclick="editTodo(todo)">
+        <input type="checkbox" v-model="todo.completed">
+        <div class="todo-item-label" v-if="!todo.editing" @dblclick="editTodo(todo)" :class="{ completed : todo.completed}">
             {{todo.title}}
         </div>
         <input type="text" v-else v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" class="todo-item-edit" v-focus>
@@ -130,5 +131,10 @@ height: 60px;
     height: 60px;
     width: 100%;
     margin-left: 12px;
+}
+.completed {
+  text-decoration: line-through;
+  color: grey;
+  cursor: pointer;
 }
 </style>
