@@ -1,8 +1,12 @@
 <template>
   <div><input type="text" class="todo-input" placeholder="Zadej úkol" v-model="newTodo" @keyup.enter="addTodo"></div>
-  <div v-for="todo in todos" :key="todo.id" class="todo-item">
-    {{todo.title}}
-
+  <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item">
+    <div>
+        {{todo.title}}
+    </div>
+    <div class="remove-item" @click="removeTodo(index)">
+        &times;
+    </div>
   </div>
 </template>
 
@@ -48,6 +52,10 @@ export default {
         })
         this.newTodo = ''
         this.idForTodo++
+    },
+    removeTodo(index) {
+        //Metoda splice z pole todos, vezme index položky na kterou jsem kliknul, a 1 že chci vymazat jeden item
+        this.todos.splice(index, 1)
     }
   }
 };
@@ -71,5 +79,9 @@ export default {
     padding: 5px 0px;
     
 
+}
+.remove-item {
+    color: #D70009;
+    cursor: pointer;
 }
 </style>
