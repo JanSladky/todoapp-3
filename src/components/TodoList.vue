@@ -28,8 +28,9 @@
       <button :class="{ active: filter == 'completed'}" @click="filter = 'completed'"> hotové</button>
     </div>
     <div>
-
-    <button v-if="showClearCompletedButton" @click="clearCompleted">Clear completed</button>
+      <transition name="fade">
+        <button v-if="showClearCompletedButton" @click="clearCompleted">Clear completed</button>
+      </transition>
     </div>
   </div>
 </template>
@@ -209,5 +210,11 @@ button {
 }
 .active {
   background: lightgreen;
-} 
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>
