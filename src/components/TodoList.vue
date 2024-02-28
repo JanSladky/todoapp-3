@@ -1,18 +1,21 @@
 <template>
   <div><input type="text" class="todo-input" placeholder="Zadej úkol" v-model="newTodo" @keyup.enter="addTodo"></div>
-  <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
-    <div class="todo-item-left">
-        <input type="checkbox" v-model="todo.completed">
-        <div class="todo-item-label" v-if="!todo.editing" @dblclick="editTodo(todo)" :class="{ completed : todo.completed}">
-            {{todo.title}}
-        </div>
-        <input type="text" v-else v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" class="todo-item-edit" v-focus>
+  <transition-group name="fade" enter-active-class="animate__animated animate__fadeInUp" leave-active-class="animate__animated animate__fadeOut">
+    <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
+      <div class="todo-item-left">
+          <input type="checkbox" v-model="todo.completed">
+          <div class="todo-item-label" v-if="!todo.editing" @dblclick="editTodo(todo)" :class="{ completed : todo.completed}">
+              {{todo.title}}
+          </div>
+          <input type="text" v-else v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" class="todo-item-edit" v-focus>
+      </div>
+          
+      <div class="remove-item" @click="removeTodo(index)">
+          &times;
+      </div>
     </div>
-        
-    <div class="remove-item" @click="removeTodo(index)">
-        &times;
-    </div>
-  </div>
+   </transition-group>
+
   <div class="extra-container">
     <!-- Přidání další computed properties !anyRemaining -->
     <!-- Přidání eventu @change kvůli možnosti zaškrnout vše checkboxem -->
@@ -141,6 +144,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  
 * {
     font-size: 20px;
 }
@@ -157,6 +161,7 @@ height: 60px;
     display: flex;
     justify-content: space-between;
     padding: 5px 0px;
+    animation-duration: .4s;
     
 
 }
@@ -217,4 +222,8 @@ button {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+/* alternativa k nastavení konkrétní animace */
+/* .animate__fadeIn, .animate__fadeOut {
+  --animate-duration: .5s;
+} */
 </style>
