@@ -27,7 +27,10 @@
       <button :class="{ active: filter == 'active'}" @click="filter = 'active'"> aktivní</button>
       <button :class="{ active: filter == 'completed'}" @click="filter = 'completed'"> hotové</button>
     </div>
-    
+    <div>
+
+    <button v-if="showClearCompletedButton" @click="clearCompleted">Clear completed</button>
+    </div>
   </div>
 </template>
 
@@ -81,6 +84,9 @@ export default {
         return this.todos.filter(todo => todo.completed)
       }
       return this.todos
+    },
+    showClearCompletedButton() {
+      return this.todos.filter(todo => todo.completed).length > 0
     }
   },
   directives: {
@@ -125,6 +131,9 @@ export default {
     },
     checkAllTodos(todo) {
       this.todos.forEach((todo) => todo.completed = event.target.checked)
+    },
+    clearCompleted() {
+      this.todos = this.todos.filter(todo => !todo.completed)
     }
   }
 };
