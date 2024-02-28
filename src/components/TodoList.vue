@@ -1,6 +1,6 @@
 <template>
   <div><input type="text" class="todo-input" placeholder="Zadej úkol" v-model="newTodo" @keyup.enter="addTodo"></div>
-  <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item">
+  <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
     <div class="todo-item-left">
         <input type="checkbox" v-model="todo.completed">
         <div class="todo-item-label" v-if="!todo.editing" @dblclick="editTodo(todo)" :class="{ completed : todo.completed}">
@@ -20,6 +20,15 @@
     <!-- Remaining je property a musím ji přidat do stavu-->
     <div>{{ remaining }} zbývá</div>
   </div>
+  <div class="extra-container">
+    <div>
+      <!-- :class je condition class ta funguje s nastaveným filtrem což je data property -->
+      <button :class="{ active: filter == 'all'}" @click="filter = 'all'"> vše</button>
+      <button :class="{ active: filter == 'active'}" @click="filter = 'active'"> aktivní</button>
+      <button :class="{ active: filter == 'completed'}" @click="filter = 'completed'"> hotové</button>
+    </div>
+    
+  </div>
 </template>
 
 <script>
@@ -30,6 +39,8 @@ export default {
       newTodo: "",
       idForTodo: 3,
       beforeEditCache: '',
+      filter: 'all',
+
       todos: [
         {
           'id': 1,
@@ -60,6 +71,16 @@ export default {
     },
     anyRemaining() {
       return this.remaining != 0
+    },
+    todosFiltered() {
+      if(this.filter == 'all') {
+        return this.todos
+      } else if(this.filter == 'active') {
+        return this.todos.filter(todo => !todo.completed)
+      } else if(this.filter == 'completed') {
+        return this.todos.filter(todo => todo.completed)
+      }
+      return this.todos
     }
   },
   directives: {
