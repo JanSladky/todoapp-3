@@ -13,6 +13,11 @@
         &times;
     </div>
   </div>
+  <div class="extra-container">
+    <div><label><input type="checkbox" id="">Označit vše</label></div>
+    <!-- Remaining je property a musím ji přidat do stavu-->
+    <div>{{ remaining }} zbývá</div>
+  </div>
 </template>
 
 <script>
@@ -45,6 +50,12 @@ export default {
 
       ],
     };
+  },
+  /* Computed properties a methody jsou skoro to samé, computed properties můžeme napsat jako metody,  */
+  computed: {
+    remaining() {
+      return this.todos.filter(todo => !todo.completed).length
+    }
   },
   directives: {
     focus: {
@@ -137,4 +148,28 @@ height: 60px;
   color: grey;
   cursor: pointer;
 }
+.extra-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  border-top: 1px solid lightgrey;
+  padding-top: 14px;
+  margin-bottom: 14px;
+
+}
+button {
+  font-size: 14px;
+  background-color: white;
+  appearance: none;
+  &:hover {
+    background: lightgreen;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+.active {
+  background: lightgreen;
+} 
 </style>
