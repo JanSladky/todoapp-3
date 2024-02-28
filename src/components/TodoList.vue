@@ -14,7 +14,9 @@
     </div>
   </div>
   <div class="extra-container">
-    <div><label><input type="checkbox" id="">Označit vše</label></div>
+    <!-- Přidání další computed properties !anyRemaining -->
+    <!-- Přidání eventu @change kvůli možnosti zaškrnout vše checkboxem -->
+    <div><label><input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos">Označit vše</label></div>
     <!-- Remaining je property a musím ji přidat do stavu-->
     <div>{{ remaining }} zbývá</div>
   </div>
@@ -55,6 +57,9 @@ export default {
   computed: {
     remaining() {
       return this.todos.filter(todo => !todo.completed).length
+    },
+    anyRemaining() {
+      return this.remaining != 0
     }
   },
   directives: {
@@ -96,6 +101,9 @@ export default {
     cancelEdit(todo) {
       todo.title = this.beforeEditCache
       todo.editing = false
+    },
+    checkAllTodos(todo) {
+      this.todos.forEach((todo) => todo.completed = event.target.checked)
     }
   }
 };
