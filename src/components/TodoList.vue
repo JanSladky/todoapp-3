@@ -1,39 +1,44 @@
 <template>
-  <div><input type="text" class="todo-input" placeholder="Zadej úkol" v-model="newTodo" @keyup.enter="addTodo"></div>
-  <transition-group name="fade" enter-active-class="animate__animated animate__fadeInUp" leave-active-class="animate__animated animate__fadeOut">
-    <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
-      <div class="todo-item-left">
-          <input type="checkbox" v-model="todo.completed">
-          <div class="todo-item-label" v-if="!todo.editing" @dblclick="editTodo(todo)" :class="{ completed : todo.completed}">
-              {{todo.title}}
-          </div>
-          <input type="text" v-else v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" class="todo-item-edit" v-focus>
+  <div class="container">
+    <div class="extra-container">
+      <div>
+        <!-- :class je condition class ta funguje s nastaveným filtrem což je data property -->
+        <button class="btn-filter" :class="{ active: filter == 'all'}" @click="filter = 'all'"> vše</button>
+        <button class="btn-filter" :class="{ active: filter == 'active'}" @click="filter = 'active'"> aktivní</button>
+        <button class="btn-filter" :class="{ active: filter == 'completed'}" @click="filter = 'completed'"> hotové</button>
       </div>
-          
-      <div class="remove-item" @click="removeTodo(index)">
-          &times;
+      <div>
+        <transition name="fade">
+          <button v-if="showClearCompletedButton" @click="clearCompleted">Clear completed</button>
+        </transition>
       </div>
+    </div>  
+    <div>
+      <input type="text" v-focus class="todo-input" placeholder="Zadej úkol" v-model="newTodo" @keyup.enter="addTodo">
     </div>
-   </transition-group>
 
-  <div class="extra-container">
-    <!-- Přidání další computed properties !anyRemaining -->
-    <!-- Přidání eventu @change kvůli možnosti zaškrnout vše checkboxem -->
-    <div><label><input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos">Označit vše</label></div>
-    <!-- Remaining je property a musím ji přidat do stavu-->
-    <div>{{ remaining }} zbývá</div>
-  </div>
-  <div class="extra-container">
-    <div>
-      <!-- :class je condition class ta funguje s nastaveným filtrem což je data property -->
-      <button :class="{ active: filter == 'all'}" @click="filter = 'all'"> vše</button>
-      <button :class="{ active: filter == 'active'}" @click="filter = 'active'"> aktivní</button>
-      <button :class="{ active: filter == 'completed'}" @click="filter = 'completed'"> hotové</button>
-    </div>
-    <div>
-      <transition name="fade">
-        <button v-if="showClearCompletedButton" @click="clearCompleted">Clear completed</button>
-      </transition>
+    <transition-group name="fade" enter-active-class="animate__animated animate__fadeInUp" leave-active-class="animate__animated animate__fadeOut">
+      <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
+        <div class="todo-item-left">
+            <input type="checkbox" v-model="todo.completed">
+            <div class="todo-item-label" v-if="!todo.editing" @dblclick="editTodo(todo)" :class="{ completed : todo.completed}">
+                {{todo.title}}
+            </div>
+            <input type="text" v-else v-model="todo.title" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" class="todo-item-edit" v-focus>
+        </div>
+            
+        <div class="remove-item" @click="removeTodo(index)">
+            &times;
+        </div>
+      </div>
+    </transition-group>
+
+    <div class="extra-container remaining-wrap">
+      <!-- Přidání další computed properties !anyRemaining -->
+      <!-- Přidání eventu @change kvůli možnosti zaškrnout vše checkboxem -->
+      <div><label><input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos">Označit vše</label></div>
+      <!-- Remaining je property a musím ji přidat do stavu-->
+      <div>{{ remaining }} zbývá</div>
     </div>
   </div>
 </template>
@@ -192,25 +197,43 @@ height: 60px;
   color: grey;
   cursor: pointer;
 }
-.extra-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 16px;
-  border-top: 1px solid lightgrey;
-  padding-top: 14px;
-  margin-bottom: 14px;
 
+
+
+
+  .extra-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    padding-top: 14px;
+    margin-bottom: 14px;
+
+   
+  }
+
+.extra-container.remaining-wrap {
+  border-top: 1px solid lightgrey;
 }
+
 button {
   font-size: 14px;
   background-color: white;
+   padding: 5px 10px;
   appearance: none;
+  border-radius: 5px;
   &:hover {
     background: lightgreen;
   }
   &:focus {
     outline: none;
+  }
+}
+.btn-filter {
+  margin: 5px 5px;
+ 
+  &:first-child {
+    margin: 5px 5px 5px 0px;
   }
 }
 .active {
