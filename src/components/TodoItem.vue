@@ -39,6 +39,12 @@
                 'editing': this.todo.editing,
                 'beforeEditCache': '',
             }
+        },
+        methods: {
+            removeTodo(index) {
+                /* emitnu event z dítěte do rodiče a nazvu jinak funkci minulým časem */
+                this.$emit('removedTodo', index)
+            }
         }
     }
 </script>
