@@ -20,7 +20,7 @@
     <transition-group name="fade" enter-active-class="animate__animated animate__fadeInUp" leave-active-class="animate__animated animate__fadeOut">
         <!-- přidal jsem props :todo abych mohl posílat data z rodiče todolist do dítěte todoitem -->
         <!-- Zde poslouchám na emitnutý evetn z dítěte a pouštím jím normální funkci v rodiči -->
-      <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index" @removedTodo="removeTodo">
+      <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index" @removedTodo="removeTodo" @finishedEdit="finishedEdit">
        
       </todo-item>
     </transition-group>
@@ -136,6 +136,10 @@ export default {
       todo.title = this.beforeEditCache
       todo.editing = false
     },
+    /* to data mi reprezuntuje to co emituju z dítěte to index a todo, upraviji jeden prvek to je ta 1ka */
+    finishedEdit(data) {
+      this.todos.splice(data.index, 1, data.todo) 
+    },
     checkAllTodos(todo) {
       this.todos.forEach((todo) => todo.completed = event.target.checked)
     },
@@ -146,7 +150,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   
 * {
     font-size: 20px;

@@ -44,7 +44,30 @@
             removeTodo(index) {
                 /* emitnu event z dítěte do rodiče a nazvu jinak funkci minulým časem */
                 this.$emit('removedTodo', index)
-            }
+            },
+            editTodo() {
+                this.beforeEditCache = this.title
+                this.editing = true
+            },
+            doneEdit() {
+                if(this.title.trim() == '') {
+                this.title = this.beforeEditCache
+                }
+                this.editing = false
+                this.$emit('finishedEdit', {
+                    'index': this.index,
+                    'todo': {
+                        'id': this.id,
+                        'title': this.title,
+                        'completed': this.completed,
+                        'editing': this.editing
+                    }
+                }) 
+            },
+            cancelEdit() {
+            this.title = this.beforeEditCache
+            this.editing = false
+            },
         }
     }
 </script>
