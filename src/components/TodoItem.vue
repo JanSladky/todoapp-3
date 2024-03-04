@@ -2,7 +2,8 @@
     <div class="todo-item">
         <div class="todo-item-left">
             <!-- Když přijímám data z props z rodiče zde tak už nepotřebuji to todo. a taky nepotřebuji to (todo)-->
-            <input type="checkbox" v-model="completed">
+            <!-- Přidal jsem listener na checkbox jestli se něco změní a jestli ano tak emitnu stejný event jako je doneEdit -->
+            <input type="checkbox" v-model="completed" @change="doneEdit">
             <div class="todo-item-label" v-if="!editing" @dblclick="editTodo" :class="{ completed : completed}">
                 {{title}}
             </div>
@@ -28,8 +29,13 @@
             index: {
                 type: Number,
                 required: true,
+            },
+            checkAll: {
+                type: Boolean,
+                required: true,
             }
         },
+       
         /* Zde přenáším data z rodičovského propsu do dítěte a přijímám je zde */
         data() {
             return {
@@ -39,6 +45,19 @@
                 'editing': this.todo.editing,
                 'beforeEditCache': '',
             }
+        },
+         watch: {
+            checkAll() {
+                /* Varianta 1 zápisu */
+                if (this.checkAll) {
+                    this.completed = true
+                } else {
+                    this.completed = this.todo.completed
+                } 
+                /* Varianta 2 zápisu */
+               /*  this.completed = this.checkAll ? true : this.todo.completed */
+            }
+
         },
         methods: {
             removeTodo(index) {

@@ -20,7 +20,7 @@
     <transition-group name="fade" enter-active-class="animate__animated animate__fadeInUp" leave-active-class="animate__animated animate__fadeOut">
         <!-- přidal jsem props :todo abych mohl posílat data z rodiče todolist do dítěte todoitem -->
         <!-- Zde poslouchám na emitnutý evetn z dítěte a pouštím jím normální funkci v rodiči -->
-      <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index" @removedTodo="removeTodo" @finishedEdit="finishedEdit">
+      <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index" :checkAll="!anyRemaining" @removedTodo="removeTodo" @finishedEdit="finishedEdit">
        
       </todo-item>
     </transition-group>
