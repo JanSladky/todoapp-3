@@ -67,6 +67,9 @@ export default createStore({
 				editing: todo.editing,
 			})
 		},
+    checkAll(state, checked) {
+			state.todos.forEach((todo) => (todo.completed = checked))
+		},
   },
   actions: {
     addTodo(context, todo) {
@@ -82,6 +85,11 @@ export default createStore({
     updateTodo(context, todo) {
 			setTimeout(() => {
 				context.commit('updateTodo', todo)
+			}, 100)
+		},
+    checkAll(context, checked) {
+			setTimeout(() => {
+				context.commit('checkAll', checked)
 			}, 100)
 		},
   },
