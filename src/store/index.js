@@ -3,7 +3,6 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     filter: 'all',
-
     todos: [
       {
         'id': 1,
@@ -22,9 +21,8 @@ export default createStore({
         'title': 'Umýt okna',
         'completed': false,
         'editing': false
-      }
-
-    ],
+      },
+    ]
   },
   getters: {
   },
