@@ -73,6 +73,9 @@ export default createStore({
     updateFilter(state, filter) {
 			state.filter = filter
 		},
+    clearCompleted(state) {
+			state.todos = state.todos.filter((todo) => !todo.completed)
+		},
   },
   actions: {
     addTodo(context, todo) {
@@ -99,6 +102,11 @@ export default createStore({
 			setTimeout(() => {
 				context.commit('updateFilter', filter)
 			})
+		},
+    clearCompleted(context) {
+			setTimeout(() => {
+				context.commit('clearCompleted')
+			}, 1000)
 		},
   },
   modules: {
