@@ -7,7 +7,15 @@
             <div class="todo-item-label" v-if="!editing" @dblclick="editTodo" :class="{ completed : completed}">
                 {{title}}
             </div>
-            <input type="text" v-else v-model="title" @blur="doneEdit" @keyup.enter="doneEdit" @keyup.esc="cancelEdit" class="todo-item-edit" v-focus>
+            <input type="text" 
+                v-else 
+                v-model="title" 
+                @blur="doneEdit" 
+                @keyup.enter="doneEdit" 
+                @keyup.esc="cancelEdit" 
+                class="todo-item-edit" 
+                v-focus
+            >
         </div>
                 
         <div class="remove-item" @click="removeTodo(todo.id)">
@@ -26,10 +34,6 @@
                 required: true,
 
             },
-            index: {
-                type: Number,
-                required: true,
-            },
             checkAll: {
                 type: Boolean,
                 required: true,
@@ -39,11 +43,11 @@
         /* Zde přenáším data z rodičovského propsu do dítěte a přijímám je zde */
         data() {
             return {
-                'id': this.todo.id,
-                'title': this.todo.title,
-                'completed': this.todo.completed,
-                'editing': this.todo.editing,
-                'beforeEditCache': '',
+                id: this.todo.id,
+                title: this.todo.title,
+                completed: this.todo.completed,
+                editing: this.todo.editing,
+                beforeEditCache: '',
             }
         },
          watch: {
@@ -68,21 +72,6 @@
                 this.editing = true
                 this.beforeEditCache = this.title
 		    },
-            doneEdit() {
-                if(this.title.trim() == '') {
-                this.title = this.beforeEditCache
-                }
-                this.editing = false
-                this.$emit('finishedEdit', {
-                    'index': this.index,
-                    'todo': {
-                        'id': this.id,
-                        'title': this.title,
-                        'completed': this.completed,
-                        'editing': this.editing
-                    }
-                }) 
-            },
             doneEdit() {
 			if (this.title.trim() == '') {
 				this.title = this.beforeEditCache
