@@ -46,8 +46,21 @@ export default createStore({
     }
   },
   mutations: {
+    addTodo(state, todo) {
+			state.todos.push({
+				id: todo.id,
+				title: todo.title,
+				completed: false,
+				editing: false,
+			})
+		},
   },
   actions: {
+    addTodo(context, todo) {
+			setTimeout(() => {
+				context.commit('addTodo', todo)
+			}, 100)
+		},
   },
   modules: {
   }
