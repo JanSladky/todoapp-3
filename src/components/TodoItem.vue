@@ -83,6 +83,19 @@
                     }
                 }) 
             },
+            doneEdit() {
+			if (this.title.trim() == '') {
+				this.title = this.beforeEditCache
+			}
+			this.editing = false
+
+			this.$store.dispatch('updateTodo', {
+				id: this.id,
+				title: this.title,
+				completed: this.completed,
+				editing: this.editing,
+			})
+		},
             cancelEdit() {
             this.title = this.beforeEditCache
             this.editing = false

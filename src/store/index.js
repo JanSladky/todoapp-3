@@ -58,6 +58,15 @@ export default createStore({
 			const index = state.todos.findIndex((item) => item.id == id)
 			state.todos.splice(index, 1)
 		},
+    updateTodo(state, todo) {
+			const index = state.todos.findIndex((item) => item.id == todo.id)
+			state.todos.splice(index, 1, {
+				id: todo.id,
+				title: todo.title,
+				completed: todo.completed,
+				editing: todo.editing,
+			})
+		},
   },
   actions: {
     addTodo(context, todo) {
@@ -68,6 +77,11 @@ export default createStore({
     deleteTodo(context, id) {
 			setTimeout(() => {
 				context.commit('deleteTodo', id)
+			}, 100)
+		},
+    updateTodo(context, todo) {
+			setTimeout(() => {
+				context.commit('updateTodo', todo)
 			}, 100)
 		},
   },
