@@ -49,29 +49,6 @@ export default {
       newTodo: "",
       idForTodo: 3,
       beforeEditCache: '',
-      filter: 'all',
-
-      todos: [
-        {
-          'id': 1,
-          'title': 'Dokonči vue kurz',
-          'completed': false,
-          'editing': false
-        },
-        {
-          'id': 2,
-          'title': 'Vyluxovat',
-          'completed': true,
-          'editing': false
-        },
-        {
-          'id': 3,
-          'title': 'Umýt okna',
-          'completed': false,
-          'editing': false
-        }
-
-      ],
     };
   },
   /* Computed properties a methody jsou skoro to samé, computed properties můžeme napsat jako metody,  */
