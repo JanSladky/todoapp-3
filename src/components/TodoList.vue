@@ -26,8 +26,8 @@
     </transition-group>
 
     <div class="extra-container remaining-wrap">
+      <todo-check-all />
       
-      <div><label><input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos">Označit vše</label></div>
       <todo-items-remainig></todo-items-remainig>
       
 
@@ -40,12 +40,14 @@
 
 import TodoItem from './TodoItem.vue'
 import TodoItemsRemainig from './TodoItemsRemaining.vue'
+import TodoCheckAll from './TodoCheckAll.vue'
 
 export default {
   name: "todo-list",
   components: {
     TodoItem,
     TodoItemsRemainig,
+    TodoCheckAll,
   },
   data() {
     return {

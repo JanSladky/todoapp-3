@@ -62,7 +62,7 @@
         methods: {
             removeTodo(index) {
                 /* emitnu event z dítěte do rodiče a nazvu jinak funkci minulým časem */
-                this.$emit('removedTodo', index)
+                this.$store.state.todos.splice(index, 1)
             },
             editTodo() {
                 this.beforeEditCache = this.title
