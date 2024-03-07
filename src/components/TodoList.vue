@@ -1,12 +1,7 @@
 <template>
   <div class="container">
     <div class="extra-container">
-      <div>
-        <!-- :class je condition class ta funguje s nastaveným filtrem což je data property -->
-        <button class="btn-filter" :class="{ active: filter == 'all'}" @click="filter = 'all'"> vše</button>
-        <button class="btn-filter" :class="{ active: filter == 'active'}" @click="filter = 'active'"> aktivní</button>
-        <button class="btn-filter" :class="{ active: filter == 'completed'}" @click="filter = 'completed'"> hotové</button>
-      </div>
+      <todo-filtered></todo-filtered>
       <todo-clear-completed></todo-clear-completed>
     </div>  
     <div>
@@ -38,6 +33,7 @@ import TodoItem from './TodoItem.vue'
 import TodoItemsRemainig from './TodoItemsRemaining.vue'
 import TodoCheckAll from './TodoCheckAll.vue'
 import TodoClearCompleted from './TodoClearCompleted.vue'
+import TodoFiltered from './TodoFiltered.vue'
 
 export default {
   name: "todo-list",
@@ -46,6 +42,7 @@ export default {
     TodoItemsRemainig,
     TodoCheckAll,
     TodoClearCompleted,
+    TodoFiltered,
   },
   data() {
     return {
