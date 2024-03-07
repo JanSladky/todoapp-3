@@ -54,11 +54,20 @@ export default createStore({
 				editing: false,
 			})
 		},
+    deleteTodo(state, id) {
+			const index = state.todos.findIndex((item) => item.id == id)
+			state.todos.splice(index, 1)
+		},
   },
   actions: {
     addTodo(context, todo) {
 			setTimeout(() => {
 				context.commit('addTodo', todo)
+			}, 100)
+		},
+    deleteTodo(context, id) {
+			setTimeout(() => {
+				context.commit('deleteTodo', id)
 			}, 100)
 		},
   },

@@ -10,7 +10,7 @@
             <input type="text" v-else v-model="title" @blur="doneEdit" @keyup.enter="doneEdit" @keyup.esc="cancelEdit" class="todo-item-edit" v-focus>
         </div>
                 
-        <div class="remove-item" @click="removeTodo(index)">
+        <div class="remove-item" @click="removeTodo(todo.id)">
             &times;
         </div>
     </div>
@@ -60,9 +60,9 @@
 
         },
         methods: {
-            removeTodo(index) {
+            removeTodo(id) {
                 /* emitnu event z dítěte do rodiče a nazvu jinak funkci minulým časem */
-                this.$store.state.todos.splice(index, 1)
+                this.$store.dispatch('deleteTodo', id)
             },
             editTodo() {
                 this.beforeEditCache = this.title
