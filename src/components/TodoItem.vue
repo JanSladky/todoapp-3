@@ -65,9 +65,9 @@
                 this.$store.dispatch('deleteTodo', id)
             },
             editTodo() {
-                this.beforeEditCache = this.title
                 this.editing = true
-            },
+                this.beforeEditCache = this.title
+		    },
             doneEdit() {
                 if(this.title.trim() == '') {
                 this.title = this.beforeEditCache
