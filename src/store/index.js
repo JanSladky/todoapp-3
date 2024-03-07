@@ -70,6 +70,9 @@ export default createStore({
     checkAll(state, checked) {
 			state.todos.forEach((todo) => (todo.completed = checked))
 		},
+    updateFilter(state, filter) {
+			state.filter = filter
+		},
   },
   actions: {
     addTodo(context, todo) {
@@ -91,6 +94,11 @@ export default createStore({
 			setTimeout(() => {
 				context.commit('checkAll', checked)
 			}, 100)
+		},
+    updateFilter(context, filter) {
+			setTimeout(() => {
+				context.commit('updateFilter', filter)
+			})
 		},
   },
   modules: {
