@@ -75,23 +75,16 @@ export default {
   /* Computed properties a methody jsou skoro to samé, computed properties můžeme napsat jako metody,  */
   computed: {
     remaining() {
-      return this.$store.state.todos.filter(todo => !todo.completed).length
+      return this.$store.getters.remaining
     },
     anyRemaining() {
-      return this.remaining != 0
+      return this.$store.getters.anyRemaining
     },
     todosFiltered() {
-      if(this.$store.state.filter == 'all') {
-        return this.$store.state.todos
-      } else if(this.$store.state.filter == 'active') {
-        return this.$store.state.todos.filter(todo => !todo.completed)
-      } else if(this.$store.state.filter == 'completed') {
-        return this.$store.state.todos.filter(todo => todo.completed)
-      }
-      return this.$store.state.todos
+      return this.$store.getters.todosFiltered
     },
     showClearCompletedButton() {
-      return this.$store.state.todos.filter(todo => todo.completed).length > 0
+      return this.$store.getters.showClearCompletedButton
     }
   },
   directives: {
@@ -136,6 +129,7 @@ export default {
     },
     /* to data mi reprezuntuje to co emituju z dítěte to index a todo, upraviji jeden prvek to je ta 1ka */
     finishedEdit(data) {
+     
       this.$store.state.todos.splice(data.index, 1, data.todo) 
     },
     checkAllTodos(todo) {
