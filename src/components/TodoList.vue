@@ -7,11 +7,7 @@
         <button class="btn-filter" :class="{ active: filter == 'active'}" @click="filter = 'active'"> aktivní</button>
         <button class="btn-filter" :class="{ active: filter == 'completed'}" @click="filter = 'completed'"> hotové</button>
       </div>
-      <div>
-        <transition name="fade">
-          <button v-if="showClearCompletedButton" @click="clearCompleted">Clear completed</button>
-        </transition>
-      </div>
+      <todo-clear-completed></todo-clear-completed>
     </div>  
     <div>
       <input type="text" v-focus class="todo-input" placeholder="Zadej úkol" v-model="newTodo" @keyup.enter="addTodo">
@@ -41,6 +37,7 @@
 import TodoItem from './TodoItem.vue'
 import TodoItemsRemainig from './TodoItemsRemaining.vue'
 import TodoCheckAll from './TodoCheckAll.vue'
+import TodoClearCompleted from './TodoClearCompleted.vue'
 
 export default {
   name: "todo-list",
@@ -48,6 +45,7 @@ export default {
     TodoItem,
     TodoItemsRemainig,
     TodoCheckAll,
+    TodoClearCompleted,
   },
   data() {
     return {
