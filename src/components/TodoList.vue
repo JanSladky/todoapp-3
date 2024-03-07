@@ -30,7 +30,7 @@
       <!-- Přidání eventu @change kvůli možnosti zaškrnout vše checkboxem -->
       <div><label><input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos">Označit vše</label></div>
       <!-- Remaining je property a musím ji přidat do stavu-->
-      <div>{{ remaining }} zbývá</div>
+      
     </div>
   </div>
 </template>
@@ -38,11 +38,13 @@
 <script>
 
 import TodoItem from './TodoItem.vue'
+import TodoItemsRemainig from './TodoItemsRemaining.vue'
 
 export default {
   name: "todo-list",
   components: {
-    TodoItem
+    TodoItem,
+    TodoItemsRemainig,
   },
   data() {
     return {
