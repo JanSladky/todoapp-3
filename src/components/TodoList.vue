@@ -26,10 +26,11 @@
     </transition-group>
 
     <div class="extra-container remaining-wrap">
-      <!-- Přidání další computed properties !anyRemaining -->
-      <!-- Přidání eventu @change kvůli možnosti zaškrnout vše checkboxem -->
+      
       <div><label><input type="checkbox" :checked="!anyRemaining" @change="checkAllTodos">Označit vše</label></div>
-      <!-- Remaining je property a musím ji přidat do stavu-->
+      <todo-items-remainig></todo-items-remainig>
+      
+
       
     </div>
   </div>
