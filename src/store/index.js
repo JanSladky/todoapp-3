@@ -26,7 +26,7 @@ export default createStore({
   },
   getters: {
     remaining(state) {
-      return state.todos.filter(todo => !todo.completed).length
+      return state.todos.filter((todo) => !todo.completed).length
     },
     anyRemaining(state, getters) {
       return getters.remaining != 0
@@ -39,10 +39,10 @@ export default createStore({
       } else if(state.filter == 'completed') {
         return state.todos.filter(todo => todo.completed)
       }
-      return this.$store.state.todos
+      return state.todos
     },
     showClearCompletedButton(state) {
-      return this.$store.state.todos.filter(todo => todo.completed).length > 0
+      return state.todos.filter(todo => todo.completed).length > 0
     }
   },
   mutations: {
