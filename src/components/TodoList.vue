@@ -70,6 +70,9 @@ export default {
     };
   },
   /* Computed properties a methody jsou skoro to samé, computed properties můžeme napsat jako metody,  */
+  created() {
+    this.$store.dispatch('retrieveTodos')
+  },
   computed: {
     remaining() {
       return this.$store.getters.remaining
@@ -175,7 +178,7 @@ height: 60px;
 .todo-item-edit {
     padding: 18px;
     outline: 0;
-     border: 3px solid #3fb883;
+    border: 3px solid #3fb883;
     border-radius: 5px;
     height: 60px;
     width: 100%;
@@ -186,10 +189,6 @@ height: 60px;
   color: grey;
   cursor: pointer;
 }
-
-
-
-
   .extra-container {
     display: flex;
     align-items: center;
@@ -198,7 +197,16 @@ height: 60px;
     padding-top: 14px;
     margin-bottom: 14px;
 
-   
+    button {
+      margin-right: 10px;
+
+      .active {
+        background: #3FB883;
+      }
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 
 .extra-container.remaining-wrap {
@@ -208,11 +216,11 @@ height: 60px;
 button {
   font-size: 14px;
   background-color: white;
-   padding: 5px 10px;
+  padding: 5px 10px;
   appearance: none;
   border-radius: 5px;
   &:hover {
-    background: lightgreen;
+    background: #3FB883;
   }
   &:focus {
     outline: none;
@@ -225,9 +233,7 @@ button {
     margin: 5px 5px 5px 0px;
   }
 }
-.active {
-  background: lightgreen;
-}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s;
 }
