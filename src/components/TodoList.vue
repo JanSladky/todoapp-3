@@ -5,7 +5,9 @@
       <todo-clear-completed></todo-clear-completed>
     </div>  
     <div>
+      
       <input type="text" autofocus class="todo-input" placeholder="Zadej úkol" v-model="newTodo" @keyup.enter="addTodo">
+      <div v-if="$store.state.loading" class="lds-ripple"><div></div><div></div></div>
     </div>
         <!-- přidal jsem props :todo abych mohl posílat data z rodiče todolist do dítěte todoitem -->
         <!-- Zde poslouchám na emitnutý evetn z dítěte a pouštím jím normální funkci v rodiči -->
@@ -244,4 +246,63 @@ button {
 /* .animate__fadeIn, .animate__fadeOut {
   --animate-duration: .5s;
 } */
+
+
+/* Spinner loader */
+.lds-ripple {
+  /* change color here */
+  color: #42B883
+}
+.lds-ripple,
+.lds-ripple div {
+  box-sizing: border-box;
+}
+.lds-ripple {
+  display: block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  margin-bottom: 16px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid currentColor;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+  }
+  4.9% {
+    top: 36px;
+    left: 36px;
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+  }
+  5% {
+    top: 36px;
+    left: 36px;
+    width: 8px;
+    height: 8px;
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+  }
+}
 </style>
